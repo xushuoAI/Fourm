@@ -1,0 +1,28 @@
+
+GET http://localhost:1525/forum/forumArticle/article
+
+###
+
+POST http://localhost:1525/forum/forumArticle/hello
+
+###
+GET http://localhost:1525/forum/forumArticle/article/userId/666
+
+###
+GET http://localhost:1525/forum/forumArticle/article/articleId/501
+
+###
+POST http://localhost:1525/forum/getToken/apitoken
+
+###
+POST http://localhost:1525/forum/getToken/apitoken
+Content-Type: application/json
+
+{
+  "name": "xs",
+  "pwd": "12345"
+
+}
+
+###
+

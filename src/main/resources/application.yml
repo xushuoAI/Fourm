@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: mini
+  jpa:
+
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/forum?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+
+server:
+  port: 1525
+  servlet:
+    context-path: /forum
