@@ -7,7 +7,7 @@ public enum ResultCode {
     FAILED(9001,"失败"),
 
     NOTFOUND(9404,"没有找到该项"),
-
+    NOTFOUND_USER(9405,"不存在该用户"),
 
     SYSTEM_ERROR(10000, "系统异常，请稍后重试"),
 

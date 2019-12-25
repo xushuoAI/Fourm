@@ -50,6 +50,14 @@ public class ResultArticleJson<T> {
         result.setResultCode(ResultCode.FAILED);
         return result;
     }
+    /**
+     * 失败，指定ResultCode枚举
+     */
+    public static ResultArticleJson notFoundUser() {
+        ResultArticleJson result = new ResultArticleJson();
+        result.setResultCode(ResultCode.NOTFOUND_USER);
+        return result;
+    }
 
     public static ResultArticleJson notFound(Object data) {
         ResultArticleJson result = new ResultArticleJson();

@@ -9,6 +9,6 @@ public class FileUploadConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/ForumArticleImages/**").addResourceLocations("file:E:/ForumArticleImages/");
+        registry.addResourceHandler("/ForumArticleImages/**").addResourceLocations("file:/home/forum");
     }
 }
