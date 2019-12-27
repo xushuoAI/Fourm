@@ -16,3 +16,5 @@ server:
   port: 1525
   servlet:
     context-path: /forum
+
+
