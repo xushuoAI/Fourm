@@ -26,6 +26,11 @@ public class NewsService {
     public Page<News> showAll(Pageable pageable){
         return newsRepo.findAll(pageable);
     }
-
+    public String deleteNews(Long id){
+        return newsRepo.findById(id).map(news -> {
+            newsRepo.deleteById(id);
+            return "成功删除";
+        }).orElse("不存在该新闻id");
+    }
 
 }

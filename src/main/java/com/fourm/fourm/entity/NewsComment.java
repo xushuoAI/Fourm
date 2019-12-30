@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,8 +24,9 @@ public class NewsComment implements Serializable {
     private Long newsCommentId;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "newsId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private News news;
 
     private Long userId;
@@ -40,8 +43,8 @@ public class NewsComment implements Serializable {
 
     private LocalDate newsCommentCreateTime;
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comment")
+
+    @OneToMany(mappedBy = "comment")
     private Set<NewsReply> replies;
 
 }

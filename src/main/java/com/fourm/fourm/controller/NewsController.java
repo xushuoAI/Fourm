@@ -29,11 +29,11 @@ public class NewsController {
     private NewsService newsService;
 
     //查看所有
-    @RequestMapping("/news")
+    @GetMapping
     public ResultArticleJson showNewsList(Pageable pageable) {
         return  ResultArticleJson.suc(newsService.showAll(pageable));
     }
-    @PostMapping("/save/news")
+    @PostMapping
     public ResultArticleJson saveNews(@RequestBody News news,HttpSession session) {
         //news.getAdmin().setAdminId(news.getAuthorId());
         Object o= session.getAttribute("user");
@@ -56,8 +56,8 @@ public class NewsController {
         String fileName = file.getOriginalFilename();
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
         String newFileName = UUID.randomUUID().toString()+suffixName;
-        String uploadPath ="/home/forum/"+newFileName;
-        //String uploadPath ="E:/kankan/"+newFileName;
+        //String uploadPath ="/home/forum/"+newFileName;
+        String uploadPath ="E:/kankan/"+newFileName;
         File uploadPathFile = new File(uploadPath);
         if(!uploadPathFile.getParentFile().exists()){
             uploadPathFile.getParentFile().mkdirs();
@@ -66,7 +66,8 @@ public class NewsController {
         //System.out.println("上传路径："+uploadPath);
 
         try {
-            String realPath = "http://111.229.39.131:1525/forum/ForumArticleImages/"+newFileName;
+            String realPath = "http://127.0.0.1:1525/forum/ForumArticleImages/"+newFileName;
+            //String realPath = "http://111.229.39.131:1525/forum/ForumArticleImages/"+newFileName;
             file.transferTo(new File(uploadPath));
             return "{\"uploaded\":1, \"fileName\" : \"image.png\", \"url\":\""+realPath+"\"}";
         } catch (IOException e) {
@@ -77,20 +78,10 @@ public class NewsController {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @DeleteMapping("/{id}")
+    public ResultArticleJson showNewsList(@PathVariable("id")Long id) {
+        return  ResultArticleJson.suc(newsService.deleteNews(id));
+    }
 
 
 

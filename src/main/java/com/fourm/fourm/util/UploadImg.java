@@ -45,6 +45,7 @@ public class UploadImg {
         }
         String tempFileName = UUID.randomUUID().toString() + suffix;
         String imgFilePath = "/home/forum"+tempFileName;//新生成的图片
+        //String imgFilePath = "E:/kankan/"+tempFileName;//新生成的图片
         //Base64 decoder = new Base64();
         try {
             //Base64解码
@@ -60,7 +61,7 @@ public class UploadImg {
             out.flush();
             out.close();
             String imgUrl="http://111.229.39.131/forum/ForumArticleImages/"+tempFileName;
-
+            //String imgUrl="http://127.0.0.1:1525/forum/ForumArticleImages/"+tempFileName;
             return imgUrl;
         } catch (IOException e) {
             e.printStackTrace();

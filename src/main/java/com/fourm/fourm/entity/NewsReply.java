@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -31,8 +33,9 @@ public class NewsReply implements Serializable {
     @Column(columnDefinition = "text")
     private String replyContent;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "newsCommentId")
     @JsonIgnore
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private NewsComment comment;
 }

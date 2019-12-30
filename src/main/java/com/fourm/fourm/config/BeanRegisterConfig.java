@@ -15,6 +15,7 @@ public class BeanRegisterConfig {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new TokenFilter());
         registration.addUrlPatterns("/forumArticle/*"); //需要过滤的接口
+        //registration.addInitParameter();设置不需要过滤的
         registration.setOrder(1);//filter设置优先级
         return registration;
     }
@@ -22,7 +23,7 @@ public class BeanRegisterConfig {
     public FilterRegistrationBean newsFilterBean() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new NewsFilter());
-        registration.addUrlPatterns("/News/save/*");
+        registration.addUrlPatterns("/News/*");
         registration.setOrder(2);
         return registration;
     }
