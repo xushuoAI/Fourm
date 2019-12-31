@@ -28,15 +28,15 @@ Content-Type: application/json
 
 GET http://111.229.39.131/News
 ###
-GET http://127.0.0.1:1525/forum/News/
+GET http://127.0.0.1:1525/forum/News/0
 
 ###
-POST http://111.229.39.131/News
-//POST http://127.0.0.1/News
+//POST http://111.229.39.131/News
+POST http://localhost:1525/forum/News
 Content-Type: application/json
 
 {
-  "newsTitle": "京张高铁今日开通，列车全球首次时速350公里以上自动驾驶 ",
+  "newsTitle": "测试 ",
   "newsReprinted": "新闻联播",
   "newsContent": "随着英国大选的结束，该国是否允许华为参与5G建设，谜底即将揭晓。一直紧盯英国这个亲密盟友的美国，最近也加大了对其施压力度。继特朗普月初亲自“警告”北约盟国后，上任三个月的美国新国安顾问奥布莱恩也向英国喊话了。在他口中，华为5G不但会对英国情报部门“构成风险”，甚至还能“窃取”该国核机密。据英国《金融时报》12月24日报道，奥布莱恩近日接受其采访时声称，英国政府允许华为参与该国5G建设的任何决定，都可能让中国获取英国公民“最隐私”的资料。他宣称，华为会“大规模盗取”国家机密，“无论是英国的核机密，还是军情五处或军情六处的机密”。奥布莱恩又称，英国把华为问题看成某种商业决定，“这让我们有点震惊……5G是一项关乎国家安全的决策。”在他口中，中国“越来越致力于获取世界各地民众的基因数据”，这也加剧了美国对5G的担忧。作为博尔顿的继任者，奥布莱恩9月出任美国国安顾问以来，在对华为的抹黑方面可谓不遗余力：11月23日以“情报共享”威胁加拿大、11月27日又要德国“把华为烧掉”。值得注意的是，算上英国，奥布莱恩至少已经三次将华为描述成“特洛伊木马”。尽管曾被美国以“限制情报共享”相要挟，但英国对华为5G的立场一直举棋不定。特蕾莎·梅政府年初曾被曝“允许华为有限参加5G网络建设”，继任的约翰逊政府也一度传出类似消息。不过，由于脱欧和大选等事务繁杂，英国数字文化媒体和体育大臣尼科拉·摩根11月2日回答下议院问询时透露，有关华为5G的问题将由大选后的新政府决定，或推迟至明年。随着2020年将至，来自美国的压力也逐渐增加。12月初伦敦举行的北约峰会上，特朗普亲自向盟友施压。约翰逊其后表示，不希望英国对海外投资抱有不必要的敌意，但也不能损害至关重要的国家安全，不能损害与“五眼联盟”伙伴协作的能力。而奥布莱恩如今的这番话，被《金融时报》解读为把华盛顿的施压“提升到一个新水平”。英国《独立报》称，华为尚未对奥布莱恩进行回应，但华为全球政府事务部总裁张建岗（Victor Zhang）此前受访时表示：“我有信心英国会选择华为，因为英国一直以证据和事实为基础，其决策将基于国家的长期利益，满足社会和所有消费者的利益。",
   "publicTime": "2019-12-28",
@@ -88,14 +88,14 @@ Content-Type: application/json
 
 POST http://localhost:1525/forum/News/img/upload
 ###
-POST http://111.229.39.131/userAdmin/save
+//POST http://111.229.39.131/userAdmin/save
+POST http://localhost:1525/forum/login/admin
 Content-Type: application/json
 
 {
-  "adminName": "test",
-  "adminPassword": "test",
-  "roleName": "test",
-  "adminStatus": 1
+  "adminName": "admin",
+  "adminPassword": "admin"
+
 
 }
 ###
@@ -119,15 +119,35 @@ Content-Type: application/json
   "newsCommentContent": "测试",
   "newsCommentCreateTime": "2019-12-29"
 
-
-
 }
 
 ###
+GET http://localhost:1525/forum/News/2
+
+###
+
+GET http://111.229.39.131/News
+
+###
+
+POST https://aip.baidubce.com/rest/2.0/solution/v1/text_censor/v2/user_defined?access_token=24.87348e2935d9cec4f164624397e5b478.2592000.1580358357.282335-18146516
+Content-Type:application/x-www-form-urlencoded
+{
+"strategyId":int1131
+"text":string"傻逼"
+}
+
+###
+
 GET http://localhost:1525/forum/newscomment/2
 
 ###
+POST http://localhost:1525/forum/newscomment?newsid=1
+Content-Type:application/json
 
-GET http://111.229.39.131/user
 
-###
+{
+"newsCommentContent":"评论1",
+"newsCommentCreateTime":"2019-12-31"
+
+}

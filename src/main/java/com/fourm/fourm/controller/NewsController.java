@@ -1,11 +1,13 @@
 package com.fourm.fourm.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.fourm.fourm.entity.Admin;
 import com.fourm.fourm.entity.News;
 import com.fourm.fourm.result.entity.ResultArticleJson;
 import com.fourm.fourm.service.NewsService;
 
+import com.fourm.fourm.util.HttpClient;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -33,6 +35,11 @@ public class NewsController {
     public ResultArticleJson showNewsList(Pageable pageable) {
         return  ResultArticleJson.suc(newsService.showAll(pageable));
     }
+    @GetMapping("/{Id}")
+    public ResultArticleJson showNewsById(@PathVariable("Id") Long id) {
+        return  ResultArticleJson.suc(newsService.findNewsById(id));
+    }
+
     @PostMapping
     public ResultArticleJson saveNews(@RequestBody News news,HttpSession session) {
         //news.getAdmin().setAdminId(news.getAuthorId());
@@ -40,16 +47,22 @@ public class NewsController {
 
         if (o!=null){
             news.setAdmin((Admin) o);
-            newsService.saveNews(news);
-            return ResultArticleJson.suc(newsService.saveNews(news));
+            //System.out.println(HttpClient.doPost(news.getNewsTitle()));
+            JSONObject titleC=JSONObject.parseObject(HttpClient.doPost(news.getNewsTitle()));
+            JSONObject contentC=JSONObject.parseObject(HttpClient.doPost(news.getNewsContent()));
+            String title= (String) titleC.get("conclusion");
+            String content= (String) contentC.get("conclusion");
+            if (title.equals("合规")&&content.equals("合规")){
+                newsService.saveNews(news);
+                return ResultArticleJson.suc(newsService.saveNews(news));
+            }else{
+                return ResultArticleJson.fail(9011,"存在低俗辱骂不合规");
+            }
         }else{
-            return ResultArticleJson.fail();
+            return ResultArticleJson.fail(9001,"你还未登录");
         }
 
-
-
     }
-
     @RequestMapping(value = "/save/img", method = RequestMethod.POST)
     public String upload(@RequestParam("upload") MultipartFile file, HttpServletRequest request, HttpServletResponse response){
 
@@ -77,20 +90,10 @@ public class NewsController {
 
 
     }
-
     @DeleteMapping("/{id}")
     public ResultArticleJson showNewsList(@PathVariable("id")Long id) {
         return  ResultArticleJson.suc(newsService.deleteNews(id));
     }
 
-
-
-
-
-    @GetMapping("/helloSession")
-    public String sayHello(HttpSession session){
-        Object o=session.getAttribute("user");
-        return o.toString();
-    }
 
 }

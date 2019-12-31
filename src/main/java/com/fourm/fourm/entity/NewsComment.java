@@ -45,6 +45,7 @@ public class NewsComment implements Serializable {
 
 
     @OneToMany(mappedBy = "comment")
+    @JsonIgnore
     private Set<NewsReply> replies;
 
 }

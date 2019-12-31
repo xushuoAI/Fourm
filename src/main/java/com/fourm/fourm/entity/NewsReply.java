@@ -33,9 +33,9 @@ public class NewsReply implements Serializable {
     @Column(columnDefinition = "text")
     private String replyContent;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "newsCommentId")
-    @JsonIgnore
     @OnDelete(action = OnDeleteAction.CASCADE)
     private NewsComment comment;
 }

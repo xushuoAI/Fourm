@@ -1,10 +1,12 @@
 package com.fourm.fourm.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -30,6 +32,7 @@ public class News implements Serializable {
     @Column(columnDefinition = "text", nullable = false)
     private String newsContent;
 
+    //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDate publicTime;
 
     private String newsPicture;

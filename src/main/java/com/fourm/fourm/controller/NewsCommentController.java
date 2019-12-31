@@ -1,6 +1,7 @@
 package com.fourm.fourm.controller;
 
 
+import com.fourm.fourm.entity.Admin;
 import com.fourm.fourm.entity.News;
 import com.fourm.fourm.entity.NewsComment;
 import com.fourm.fourm.entity.NewsReply;
@@ -9,6 +10,8 @@ import com.fourm.fourm.repository.NewsCommentRepo;
 import com.fourm.fourm.result.entity.ResultArticleJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 
 @RestController
@@ -26,13 +29,21 @@ public class NewsCommentController {
         //return ResultArticleJson.suc();
 
     }
-    @PostMapping
-    public ResultArticleJson saveComment(@RequestBody NewsComment newsComment,@RequestParam("newsid") Long newsId) {
+  /*  @PostMapping
+    public ResultArticleJson saveComment(@RequestBody NewsComment newsComment, @RequestParam("newsid") Long newsId, HttpSession session) {
         News news=new News();
         news.setNewsId(newsId);
-        newsComment.setNews(news);
-        return ResultArticleJson.suc(newsCommentRepo.saveAndFlush(newsComment));
-    }
+        Admin o= (Admin)session.getAttribute("user");
+        if (o!=null){
+            newsComment.setNews(news);
+            newsComment.setUserId(o.getAdminId());
+            return ResultArticleJson.suc(newsCommentRepo.saveAndFlush(newsComment));
+        }else{
+            return ResultArticleJson.fail(9001,"你还未登录");
+        }
+
+
+    }*/
     @DeleteMapping("/{id}")
     public ResultArticleJson deleteComment(@PathVariable("id")long id) {
         return newsCommentRepo.findById(id).map(newsComment -> {
